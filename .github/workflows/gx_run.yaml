@@ -29,9 +29,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create GCP keyfile for Docker
+      - name: Write GCP credentials to file
         run: |
-          printf '%s' "${{ secrets.GOOGLE_CREDENTIALS }}" > ./gcp_key.json
+          echo "$GOOGLE_CREDENTIALS" > gcp_key.json
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Build Docker image
         run: |
