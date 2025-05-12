@@ -6,7 +6,18 @@
       "expectation_type": "expect_table_columns_to_match_ordered_list",
       "kwargs": {
         "column_list": [
-          "year"
+          "year",
+          "seniority_level",
+          "employment_status",
+          "job_title",
+          "salary_eur",
+          "salary_currency",
+          "salary",
+          "country",
+          "remote_ratio",
+          "company_location",
+          "company_size",
+          "job_category"
         ]
       },
       "meta": {}
@@ -14,8 +25,8 @@
     {
       "expectation_type": "expect_table_row_count_to_be_between",
       "kwargs": {
-        "max_value": 2,
-        "min_value": 2
+        "max_value": 100000,
+        "min_value": 10000
       },
       "meta": {}
     }

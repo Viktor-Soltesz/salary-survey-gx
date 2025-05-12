@@ -3,7 +3,7 @@ import os
 
 # Define the path to your great_expectations directory relative to this script
 # Assuming run_validation.py is in the directory *above* the 'ge' folder
-GE_ROOT_DIR = "ge/great_expectations"
+GE_ROOT_DIR = "great_expectations"
 
 # Define the name of the checkpoint you want to run
 CHECKPOINT_NAME = "checkpoint_model"

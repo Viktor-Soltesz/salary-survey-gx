@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.gz
+*.zip
+.env
+.venv
+.idea/
+.vscode/
+.great_expectations/uncommitted/
