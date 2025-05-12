@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/gx_validation.yaml'
-      - 'salary_survey_gx/**'
+      - '.github/workflows/gx_run.yaml'
+      - '**'
 
 jobs:
   gx-run:
@@ -30,7 +30,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GCP keyfile for Docker
-        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > ./gcp_key.json
+        run: |
+          printf '%s' "${{ secrets.GOOGLE_CREDENTIALS }}" > ./gcp_key.json
 
       - name: Build Docker image
         run: |
