@@ -34,7 +34,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t salary-survey-gx ./salary_survey_gx
+          docker build -t salary-survey-gx .
 
       - name: Run GX Validation in Docker
         run: |
