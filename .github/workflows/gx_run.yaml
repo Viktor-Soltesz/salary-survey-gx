@@ -34,14 +34,14 @@ jobs:
           docker run --rm \
             -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp_key.json \
             -v ${{ github.workspace }}/gcp_key.json:/tmp/gcp_key.json \
-            -v ${{ github.workspace }}/gx_docs_output:/app/gx_docs_output \
+            -v ${{ github.workspace }}/gx_docs_output:/app/great_expectations/gx_docs_output \
             salary-survey-gx
 
       - name: Move GX docs to repo and commit
         run: |
           mkdir -p docs/gx_site
           rm -rf docs/gx_site/*
-          cp -r gx_docs_output/* docs/gx_site/
+          cp -r gx_docs_output/. docs/gx_site/
 
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
