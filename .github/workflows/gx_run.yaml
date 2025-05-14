@@ -27,6 +27,12 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
+      - name: Pull latest gx_site from gh-pages branch
+        run: |
+          git fetch origin gh-pages
+          git show origin/gh-pages:gx_site > /dev/null || mkdir gx_site
+          git checkout origin/gh-pages -- gx_site || echo "No existing gx_site found"
+
       - name: Build Docker image
         run: |
           docker build -t salary-survey-gx .
