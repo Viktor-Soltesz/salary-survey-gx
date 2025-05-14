@@ -62,8 +62,10 @@ jobs:
           # Commit and push
           cd gh_pages_temp
           git init
-          git remote add origin https://github.com/${{ github.repository }}
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git checkout -b gh-pages
           git add gx_site
           git commit -m "Update GX docs [auto]" || echo "No changes to commit"
           git push --force origin gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
