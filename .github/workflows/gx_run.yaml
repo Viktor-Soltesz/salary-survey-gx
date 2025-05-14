@@ -27,11 +27,11 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - name: Pull latest gx_site from gh-pages branch
+      - name: Pull validation metadata from gh-pages branch
         run: |
           git fetch origin gh-pages
-          git show origin/gh-pages:gx_site > /dev/null || mkdir gx_site
-          git checkout origin/gh-pages -- gx_site || echo "No existing gx_site found"
+          git show origin/gh-pages:validation_metadata > /dev/null || mkdir -p validation_metadata
+          git checkout origin/gh-pages -- validation_metadata || echo "No existing metadata found"
 
       - name: Build Docker image
         run: |
@@ -39,33 +39,33 @@ jobs:
 
       - name: Run GX Validation in Docker and output docs
         run: |
-          mkdir -p gx_docs_output
+          mkdir -p gx_site
           docker run --rm \
             -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp_key.json \
             -v ${{ github.workspace }}/gcp_key.json:/tmp/gcp_key.json \
             -v ${{ github.workspace }}/gx_site:/app/great_expectations/gx_docs_output \
+            -v ${{ github.workspace }}/validation_metadata:/app/great_expectations/uncommitted/validations \
             salary-survey-gx
 
-      - name: Push GX docs to gh-pages branch
+      - name: Push GX docs and metadata to gh-pages branch
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          # Create a temp folder and fetch gh-pages into it
           mkdir gh_pages_temp
           git fetch origin gh-pages
           git --work-tree=gh_pages_temp checkout origin/gh-pages -- gx_site || echo "No existing gx_site found"
+          git --work-tree=gh_pages_temp checkout origin/gh-pages -- validation_metadata || echo "No existing metadata found"
 
-          # Merge Docker output into the temp gx_site
           cp -r gx_site/. gh_pages_temp/gx_site/
+          cp -r validation_metadata/. gh_pages_temp/validation_metadata/
 
-          # Commit and push
           cd gh_pages_temp
           git init
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git checkout -b gh-pages
-          git add gx_site
-          git commit -m "Update GX docs [auto]" || echo "No changes to commit"
+          git add gx_site validation_metadata
+          git commit -m "Update GX docs and metadata [auto]" || echo "No changes to commit"
           git push --force origin gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
