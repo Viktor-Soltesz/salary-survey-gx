@@ -50,19 +50,20 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-      
-          # Fetch and switch to gh-pages
+
+          # Create a temp folder and fetch gh-pages into it
+          mkdir gh_pages_temp
           git fetch origin gh-pages
-          git switch --force-create gh-pages origin/gh-pages
-      
-          # Ensure gx_site/ exists and retains history
-          mkdir -p gx_site
-      
-          # Merge new GX output into existing gx_site
-          cp -r gx_docs_output/. gx_site/
-      
+          git --work-tree=gh_pages_temp checkout origin/gh-pages -- gx_site || echo "No existing gx_site found"
+
+          # Merge Docker output into the temp gx_site
+          cp -r gx_site/. gh_pages_temp/gx_site/
+
+          # Commit and push
+          cd gh_pages_temp
+          git init
+          git remote add origin https://github.com/${{ github.repository }}
+          git checkout -b gh-pages
           git add gx_site
           git commit -m "Update GX docs [auto]" || echo "No changes to commit"
-          git push origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git push --force origin gh-pages
