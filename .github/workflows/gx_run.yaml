@@ -27,10 +27,10 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - name: Pull validation metadata from gh-pages branch
+      - name: Fetch existing GX docs and validation metadata from gh-pages
         run: |
           git fetch origin gh-pages
-          git show origin/gh-pages:validation_metadata > /dev/null || mkdir -p validation_metadata
+          git checkout origin/gh-pages -- gx_site || echo "No existing site found"
           git checkout origin/gh-pages -- validation_metadata || echo "No existing metadata found"
 
       - name: Build Docker image
@@ -39,7 +39,6 @@ jobs:
 
       - name: Run GX Validation in Docker and output docs
         run: |
-          mkdir -p gx_site
           docker run --rm \
             -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp_key.json \
             -v ${{ github.workspace }}/gcp_key.json:/tmp/gcp_key.json \
