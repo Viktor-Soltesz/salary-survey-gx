@@ -43,7 +43,7 @@ jobs:
           docker run --rm \
             -e GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp_key.json \
             -v ${{ github.workspace }}/gcp_key.json:/tmp/gcp_key.json \
-            -v ${{ github.workspace }}/gx_docs_output:/app/great_expectations/gx_docs_output \
+            -v ${{ github.workspace }}/gx_site:/app/great_expectations/gx_docs_output \
             salary-survey-gx
 
       - name: Push GX docs to gh-pages branch
