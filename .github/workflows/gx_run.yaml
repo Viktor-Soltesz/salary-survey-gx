@@ -44,14 +44,17 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-
-          # Clone the gh-pages branch into a separate folder
+      
+          # Fetch and switch to gh-pages
           git fetch origin gh-pages
           git switch --force-create gh-pages origin/gh-pages
-
+      
+          # Ensure gx_site/ exists and retains history
           mkdir -p gx_site
+      
+          # Merge new GX output into existing gx_site
           cp -r gx_docs_output/. gx_site/
-
+      
           git add gx_site
           git commit -m "Update GX docs [auto]" || echo "No changes to commit"
           git push origin gh-pages
