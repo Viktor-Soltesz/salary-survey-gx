@@ -1,0 +1,110 @@
+{
+  "evaluation_parameters": {},
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {},
+      "data_asset_name": "surveys.developer_salaries",
+      "data_connector_name": "default_inferred_data_connector_name",
+      "datasource_name": "my_first_dbt_model"
+    },
+    "batch_markers": {
+      "ge_load_time": "20250514T201408.195606Z"
+    },
+    "batch_spec": {
+      "batch_identifiers": {},
+      "data_asset_name": "surveys.developer_salaries",
+      "data_asset_name_prefix": "",
+      "data_asset_name_suffix": "",
+      "include_schema_name": true,
+      "schema_name": "surveys",
+      "table_name": "developer_salaries",
+      "type": "table"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "checkpoint_model",
+    "expectation_suite_name": "surveys.developer_salaries.warning",
+    "great_expectations_version": "0.15.50",
+    "run_id": {
+      "run_name": "20250514-201406-survey-checks",
+      "run_time": "2025-05-14T20:14:06.141727+00:00"
+    },
+    "validation_id": null,
+    "validation_time": "20250514T201410.286708Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_columns_to_match_ordered_list",
+        "kwargs": {
+          "batch_id": "6fae20122ce6ce141efda70ce90b3b6c",
+          "column_list": [
+            "year",
+            "seniority_level",
+            "employment_status",
+            "job_title",
+            "salary_eur",
+            "salary_currency",
+            "salary",
+            "country",
+            "remote_ratio",
+            "company_location",
+            "company_size",
+            "job_category"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": [
+          "year",
+          "seniority_level",
+          "employment_status",
+          "job_title",
+          "salary_eur",
+          "salary_currency",
+          "salary",
+          "country",
+          "remote_ratio",
+          "company_location",
+          "company_size",
+          "job_category"
+        ]
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_row_count_to_be_between",
+        "kwargs": {
+          "batch_id": "6fae20122ce6ce141efda70ce90b3b6c",
+          "max_value": 100000,
+          "min_value": 10000
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": 15891
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 2,
+    "success_percent": 100.0,
+    "successful_expectations": 2,
+    "unsuccessful_expectations": 0
+  },
+  "success": true
+}
