@@ -7,7 +7,7 @@ from great_expectations.checkpoint import Checkpoint
 # --- Configuration ---
 PROJECT_ID = "software-developer-salaries"
 BUCKET_NAME = "software-developer-salaries-upload"
-BLOB_PATH = "surveys/developer_salaries"
+BLOB_PATH = "surveys/developer_salaries/ai-jobsnet_salaries_2024.csv"
 LOCAL_CSV_PATH = "/tmp/developer_salaries.csv"
 
 GE_ROOT_DIR = "great_expectations"
