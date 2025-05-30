@@ -12,7 +12,7 @@ LOCAL_CSV_PATH = "/tmp/developer_salaries.csv"
 
 GE_ROOT_DIR = "great_expectations"
 # 👇 CORRECTED EXPECTATION SUITE NAME 👇
-EXPECTATION_SUITE_NAME = "surveys/developer_salaries/csv_schema_warning"
+EXPECTATION_SUITE_NAME = "surveys.developer_salaries.csv_schema_warning"
 DATASOURCE_NAME = "my_pandas_datasource"
 
 # --- Step 1: Download CSV from GCS ---
