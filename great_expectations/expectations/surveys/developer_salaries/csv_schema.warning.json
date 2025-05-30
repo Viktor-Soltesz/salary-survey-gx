@@ -1,0 +1,51 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "csv_schema.warning",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_columns_to_match_ordered_list",
+      "kwargs": {
+        "column_list": [
+          "year",
+          "seniority_level",
+          "employment_status",
+          "job_title",
+          "salary_eur",
+          "salary_currency",
+          "salary",
+          "country",
+          "remote_ratio",
+          "company_location",
+          "company_size",
+          "job_category"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {
+        "max_value": 100000,
+        "min_value": 10000
+      },
+      "meta": {}
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "citations": [
+      {
+        "batch_request": {
+          "datasource_name": "my_pandas_datasource",
+          "data_connector_name": "default_runtime_data_connector_name",
+          "data_asset_name": "developer_salaries_csv",
+          "limit": 1000
+        },
+        "citation_date": "2025-05-30T00:00:00Z",
+        "comment": "Created suite adapted for CSV validation from GCS"
+      }
+    ],
+    "columns": {},
+    "great_expectations_version": "0.15.50"
+  }
+}

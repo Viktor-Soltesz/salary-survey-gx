@@ -18,6 +18,15 @@ datasources:
         include_schema_name: true
         class_name: InferredAssetSqlDataConnector
     class_name: Datasource
+  my_pandas_datasource:
+    class_name: Datasource
+    execution_engine:
+      class_name: PandasExecutionEngine
+    data_connectors:
+      default_runtime_data_connector_name:
+        class_name: RuntimeDataConnector
+        batch_identifiers:
+          - default_identifier_name
 
 config_variables_file_path: uncommitted/config_variables.yml
 

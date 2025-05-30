@@ -1,0 +1,87 @@
+name: GX CSV Schema Validation
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/gx_run_csv.yaml'
+      - 'run_csv_validation.py'
+      - 'great_expectations/**'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  gx-csv-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Write GCP credentials to file
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" > gcp_key.json
+
+      - name: Set environment variable for GCP auth
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/gcp_key.json" >> $GITHUB_ENV
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run CSV schema validation
+        run: python run_csv_validation.py
+
+      - name: Commit updated GX Data Docs
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
+          git fetch origin gh-pages
+          git switch gh-pages || git checkout --orphan gh-pages
+
+          mkdir -p gx_site
+          cp -r great_expectations/gx_docs_output/* gx_site/
+
+          git add gx_site
+          git commit -m "Update GX CSV validation docs [auto]" || echo "No changes to commit"
+          git push --force origin gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notify-slack-success:
+    needs: gx-csv-validation
+    if: success()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack of success
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: '#36a64f'
+          SLACK_MESSAGE: |
+            ✅ *GX CSV Schema Validation Passed*
+            • Repo: `${{ github.repository }}`
+            • Workflow: `${{ github.workflow }}`
+            • Run: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>
+
+  notify-slack-failure:
+    needs: gx-csv-validation
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack of failure
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: '#FF0000'
+          SLACK_MESSAGE: |
+            ❌ *GX CSV Schema Validation Failed*
+            • Repo: `${{ github.repository }}`
+            • Workflow: `${{ github.workflow }}`
+            • Run: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>
