@@ -11,7 +11,8 @@ BLOB_PATH = "surveys/developer_salaries/ai-jobsnet_salaries_2024.csv"
 LOCAL_CSV_PATH = "/tmp/developer_salaries.csv"
 
 GE_ROOT_DIR = "great_expectations"
-EXPECTATION_SUITE_NAME = "csv_schema.warning"
+# 👇 CORRECTED EXPECTATION SUITE NAME 👇
+EXPECTATION_SUITE_NAME = "surveys.developer_salaries.csv_schema.warning"
 DATASOURCE_NAME = "my_pandas_datasource"
 
 # --- Step 1: Download CSV from GCS ---
@@ -37,7 +38,7 @@ print("Creating RuntimeBatchRequest for CSV data...")
 runtime_batch_request = {
     "datasource_name": DATASOURCE_NAME,
     "data_connector_name": "default_runtime_data_connector_name",
-    "data_asset_name": "developer_salaries_csv",
+    "data_asset_name": "developer_salaries_csv", # This should match the data_asset_name used when the suite was created or is intended for.
     "runtime_parameters": {"batch_data": df},
     "batch_identifiers": {"default_identifier_name": "csv_batch"},
 }
@@ -52,28 +53,18 @@ ACTIONS_FOR_VALIDATION = [
 # --- Step 5: Run validation using a dynamic checkpoint ---
 print("Running validation checkpoint...")
 
-# Instantiate the Checkpoint with a name.
-# We don't need to pass the action_list here if we pass it with each validation below
-# OR, you can pass it here as a default for *all* validations if you don't override.
-# However, the error suggests it needs to be present with the validation dict.
 checkpoint = Checkpoint(
-    name="csv_schema_checkpoint_runtime",
+    name="csv_schema_checkpoint_runtime", # This is a runtime name for the checkpoint object
     data_context=context,
     run_name_template='%Y%m%d-%H%M%S-csv-schema-checks',
-    # You can keep action_list here if you intend it to be a default for all validations
-    # that don't explicitly specify their own action_list.
-    # But for now, we'll explicitly pass it to the validation dict in run().
-    # action_list=ACTIONS_FOR_VALIDATION, # Removed from here to demonstrate explicit per-validation list
 )
 
-# Run the checkpoint by passing the 'validations' argument,
-# ensuring each validation entry has an 'action_list'.
 results = checkpoint.run(
     validations=[
         {
             "batch_request": runtime_batch_request,
             "expectation_suite_name": EXPECTATION_SUITE_NAME,
-            "action_list": ACTIONS_FOR_VALIDATION, # <-- ADDED HERE!
+            "action_list": ACTIONS_FOR_VALIDATION,
         }
     ]
 )
@@ -83,15 +74,14 @@ if results.success:
     print("\n✅ CSV schema validation PASSED!")
 else:
     print("\n❌ CSV schema validation FAILED!")
-    print("\nValidation Results:")
-    # You can iterate through results to get more specific failure reasons
-    # for result in results.list_validation_results():
-    #     if not result.success:
-    #         print(f"  Validation for suite {result.meta.get('expectation_suite_name')} failed.")
-    #         for expectation_result in result.results:
-    #             if not expectation_result.success:
-    #                 print(f"    Expectation: {expectation_result.expectation_config.expectation_type}")
-    #                 print(f"    Result: {expectation_result.result}")
+    # Optional: print more details about failures
+    # for validation_result_identifier in results.list_validation_result_identifiers():
+    #     validation_result = results.get_validation_result(validation_result_identifier)
+    #     print(f"Validation for suite {validation_result.meta.get('expectation_suite_name')} failed:")
+    #     for expectation_result in validation_result.results:
+    #         if not expectation_result.success:
+    #             print(f"  Expectation: {expectation_result.expectation_config.expectation_type}")
+    #             print(f"  Result: {expectation_result.result}")
 
 
 index_path_original = os.path.abspath(os.path.join(
