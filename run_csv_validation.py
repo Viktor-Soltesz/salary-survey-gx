@@ -81,6 +81,9 @@ results = checkpoint.run(
     ]
 )
 
+# force-rebuild the entire Data Docs site
+context.build_data_docs()
+
 # --- Step 6: Output results and exit appropriately ---
 if results.success:
     print("\n✅ CSV schema validation PASSED!")
