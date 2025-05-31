@@ -6,18 +6,17 @@
       "expectation_type": "expect_table_columns_to_match_ordered_list",
       "kwargs": {
         "column_list": [
-          "year",
-          "seniority_level",
-          "employment_status",
+          "work_year",
+          "experience_level",
+          "employment_type",
           "job_title",
-          "salary_eur",
-          "salary_currency",
           "salary",
-          "country",
+          "salary_currency",
+          "salary_in_usd",
+          "employee_residence",
           "remote_ratio",
           "company_location",
-          "company_size",
-          "job_category"
+          "company_size"
         ]
       },
       "meta": {}
