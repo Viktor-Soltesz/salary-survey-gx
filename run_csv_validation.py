@@ -1,5 +1,6 @@
 # run_csv_validation.py
 import os
+from datetime import datetime
 import pandas as pd
 import great_expectations as gx
 from google.cloud import storage
@@ -67,7 +68,10 @@ checkpoint = Checkpoint(
     run_name_template='%Y%m%d-%H%M%S-csv-schema-checks',
 )
 
+run_name = datetime.utcnow().strftime("%Y%m%d-%H%M%S-csv-schema-checks")
+
 results = checkpoint.run(
+    run_name=run_name,
     validations=[
         {
             "batch_request": runtime_batch_request,
