@@ -1,3 +1,4 @@
+# run_csv_validation.py
 import os
 import pandas as pd
 import great_expectations as gx
@@ -32,6 +33,13 @@ df = pd.read_csv(LOCAL_CSV_PATH)
 # --- Step 3: Load GX DataContext ---
 print(f"Loading Great Expectations context from: {GE_ROOT_DIR}")
 context = gx.DataContext(context_root_dir=GE_ROOT_DIR)
+
+try:
+    context.get_expectation_suite(EXPECTATION_SUITE_NAME)
+except gx.exceptions.DataContextError:
+    raise RuntimeError(
+        f"Expectation suite '{EXPECTATION_SUITE_NAME}' not found. Make sure it’s saved under great_expectations/expectations/..."
+    )
 
 # --- Step 4: Define RuntimeBatchRequest ---
 print("Creating RuntimeBatchRequest for CSV data...")
