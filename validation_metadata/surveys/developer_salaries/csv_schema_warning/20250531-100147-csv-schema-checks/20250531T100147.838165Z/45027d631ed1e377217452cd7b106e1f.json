@@ -1,0 +1,105 @@
+{
+  "evaluation_parameters": {},
+  "meta": {
+    "active_batch_definition": {
+      "batch_identifiers": {
+        "default_identifier_name": "csv_batch"
+      },
+      "data_asset_name": "developer_salaries_csv",
+      "data_connector_name": "default_runtime_data_connector_name",
+      "datasource_name": "my_pandas_datasource"
+    },
+    "batch_markers": {
+      "ge_load_time": "20250531T100147.842094Z",
+      "pandas_data_fingerprint": "e80146155b34bc77d35341b478c72d8e"
+    },
+    "batch_spec": {
+      "batch_data": "PandasDataFrame",
+      "data_asset_name": "developer_salaries_csv"
+    },
+    "checkpoint_id": null,
+    "checkpoint_name": "csv_schema_checkpoint_runtime",
+    "expectation_suite_name": "surveys.developer_salaries.csv_schema_warning",
+    "great_expectations_version": "0.15.50",
+    "run_id": {
+      "run_name": "20250531-100147-csv-schema-checks",
+      "run_time": "2025-05-31T10:01:47.838165+00:00"
+    },
+    "validation_id": null,
+    "validation_time": "20250531T100147.852939Z"
+  },
+  "results": [
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_columns_to_match_ordered_list",
+        "kwargs": {
+          "batch_id": "45027d631ed1e377217452cd7b106e1f",
+          "column_list": [
+            "work_year",
+            "experience_level",
+            "employment_type",
+            "job_title",
+            "salary",
+            "salary_currency",
+            "salary_in_usd",
+            "employee_residence",
+            "remote_ratio",
+            "company_location",
+            "company_size"
+          ]
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": [
+          "work_year",
+          "experience_level",
+          "employment_type",
+          "job_title",
+          "salary",
+          "salary_currency",
+          "salary_in_usd",
+          "employee_residence",
+          "remote_ratio",
+          "company_location",
+          "company_size"
+        ]
+      },
+      "success": true
+    },
+    {
+      "exception_info": {
+        "exception_message": null,
+        "exception_traceback": null,
+        "raised_exception": false
+      },
+      "expectation_config": {
+        "expectation_type": "expect_table_row_count_to_be_between",
+        "kwargs": {
+          "batch_id": "45027d631ed1e377217452cd7b106e1f",
+          "max_value": 100000,
+          "min_value": 10000
+        },
+        "meta": {}
+      },
+      "meta": {},
+      "result": {
+        "observed_value": 15965
+      },
+      "success": true
+    }
+  ],
+  "statistics": {
+    "evaluated_expectations": 2,
+    "success_percent": 100.0,
+    "successful_expectations": 2,
+    "unsuccessful_expectations": 0
+  },
+  "success": true
+}
