@@ -95,7 +95,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: '#FF0000'
           SLACK_MESSAGE: |
-            ❌ *GX CSV Schema Validation Failed*
+            ❌ *GX CSV Schema Validation Failed!*
             • Repo: `${{ github.repository }}`
             • Workflow: `${{ github.workflow }}`
             • Run: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>
