@@ -27,7 +27,7 @@ validations:
       runtime_parameters: {}  # actual data will be passed in via Python script
       batch_identifiers:
         default_identifier_name: csv_batch
-    expectation_suite_name: csv_schema_warning
+    expectation_suite_name: surveys.developer_salaries.csv_schema_warning
 profilers: []
 ge_cloud_id:
 expectation_suite_ge_cloud_id:
