@@ -595,7 +595,7 @@ $(function() {
         <p>To automatically generate a notebook that does this run:</p>
         <div class="input-group mb-3">
           
-            <input type="text" class="form-control edit-command" readonly value="great_expectations suite edit surveys.developer_salaries.warning">
+            <input type="text" class="form-control edit-command" readonly value="great_expectations suite edit surveys.developer_salaries.csv_schema_warning">
           
             <div class="input-group-append">
                 <button class="btn btn-primary copy-edit-command" type="button"><i class="far fa-clipboard"></i> Copy</button>
@@ -622,7 +622,7 @@ $(function() {
         <a href="../../../../../../index.html">
           <img
             class="NO-CACHE"
-            src="https://great-expectations-web-assets.s3.us-east-2.amazonaws.com/logo-long.png?d=20250601T153812.147584Z&dataContextId=a3fc4211-dd3a-45af-9dd3-7d9ff617c7cd"
+            src="https://great-expectations-web-assets.s3.us-east-2.amazonaws.com/logo-long.png?d=20250601T153812.173694Z&dataContextId=a3fc4211-dd3a-45af-9dd3-7d9ff617c7cd"
             alt="Great Expectations"
             style="width: auto; height: 50px"
           />
@@ -631,7 +631,7 @@ $(function() {
       
         <ol class="ge-breadcrumbs breadcrumb d-md-inline-flex bg-light ml-2 mr-0 mt-0 mb-0 pt-0 pb-0 d-none">
             <li class="ge-breadcrumbs-item breadcrumb-item"><a href="../../../../../../index.html">Home</a></li>
-            <li class="ge-breadcrumbs-item breadcrumb-item active" aria-current="page">Validations / surveys.developer_salaries.warning / surveys.developer_salaries / 20250515-070637-survey-checks / 2025-05-15T07:06:37Z</li>
+            <li class="ge-breadcrumbs-item breadcrumb-item active" aria-current="page">Validations / surveys.developer_salaries.csv_schema_warning / developer_salaries_csv / 20250601-153811-csv-schema-checks / 2025-06-01T15:38:11Z</li>
         </ol>
       
     </nav>
@@ -785,7 +785,7 @@ $(function() {
         <div id="section-1-content-block-1-subheader" >
           
                 <span class="mb-0 mt-1" >
-                    <span class="h6" >Expectation Suite:</span> <a href="../../../../../../expectations/surveys/developer_salaries/warning.html" >surveys.developer_salaries.warning</a><br> Data asset: surveys.developer_salaries<br> <span class="h6" >Status:</span> <i class="fas fa-check-circle text-success" aria-hidden="true"></i> Succeeded
+                    <span class="h6" >Expectation Suite:</span> <a href="../../../../../../expectations/surveys/developer_salaries/csv_schema_warning.html" >surveys.developer_salaries.csv_schema_warning</a><br> Data asset: developer_salaries_csv<br> <span class="h6" >Status:</span> <i class="fas fa-check-circle text-success" aria-hidden="true"></i> Succeeded
                 </span>
             
         </div>
@@ -941,8 +941,8 @@ $(function() {
     <tbody>
       <tr>
           <td id="section-1-content-block-3-collapse-item-1-cell-1-1" ><div class="show-scrollbars">Great Expectations Version</div></td><td id="section-1-content-block-3-collapse-item-1-cell-1-2" ><div class="show-scrollbars">0.15.50</div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-1-cell-2-1" ><div class="show-scrollbars">Run Name</div></td><td id="section-1-content-block-3-collapse-item-1-cell-2-2" ><div class="show-scrollbars">20250515-070637-survey-checks</div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-1-cell-3-1" ><div class="show-scrollbars">Run Time</div></td><td id="section-1-content-block-3-collapse-item-1-cell-3-2" ><div class="show-scrollbars">2025-05-15T07:06:37Z</div></td></tr></tbody>
+          <td id="section-1-content-block-3-collapse-item-1-cell-2-1" ><div class="show-scrollbars">Run Name</div></td><td id="section-1-content-block-3-collapse-item-1-cell-2-2" ><div class="show-scrollbars">20250601-153811-csv-schema-checks</div></td></tr><tr>
+          <td id="section-1-content-block-3-collapse-item-1-cell-3-1" ><div class="show-scrollbars">Run Time</div></td><td id="section-1-content-block-3-collapse-item-1-cell-3-2" ><div class="show-scrollbars">2025-06-01T15:38:11Z</div></td></tr></tbody>
 </table>
     
       
@@ -1004,7 +1004,16 @@ $(function() {
                 </span>
             </div></td><td id="section-1-content-block-3-collapse-item-2-cell-1-2" class="" ><div class="show-scrollbars">
                 <span >
-                    <span style="word-break:break-all;" >20250515T070639.980359Z</span>
+                    <span style="word-break:break-all;" >20250601T153811.593655Z</span>
+                </span>
+            </div></td></tr><tr>
+          <td id="section-1-content-block-3-collapse-item-2-cell-2-1" class="pr-3" ><div class="show-scrollbars">
+                <span >
+                    <span style="word-break:break-all;" >pandas_data_fingerprint</span>
+                </span>
+            </div></td><td id="section-1-content-block-3-collapse-item-2-cell-2-2" class="" ><div class="show-scrollbars">
+                <span >
+                    <span style="word-break:break-all;" >e80146155b34bc77d35341b478c72d8e</span>
                 </span>
             </div></td></tr></tbody>
 </table>
@@ -1064,102 +1073,20 @@ $(function() {
       <tr>
           <td id="section-1-content-block-3-collapse-item-3-cell-1-1" class="pr-3" ><div class="show-scrollbars">
                 <span >
-                    <span style="word-break:break-all;" >batch_identifiers</span>
+                    <span style="word-break:break-all;" >batch_data</span>
                 </span>
-            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-1-2" class="pt-0 pl-0 border-top-0" ><div class="show-scrollbars">
-
-
-
-<table
-  id="section-1-content-block-3-collapse-item-3-cell-1-2-content-body"
-  class="table table-sm m-0" 
-  data-toggle="table"
-  
->
-    
-    
-    
-      
-      
-      
-    
-      <thead hidden>
-        <tr>
-            
-                
-                <th
-                  
-                >
-                  
-                </th>
-            
-        </tr>
-      </thead>
-
-    <tbody>
-      </tbody>
-</table></div></td></tr><tr>
+            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-1-2" class="" ><div class="show-scrollbars">
+                <span >
+                    <span style="word-break:break-all;" >PandasDataFrame</span>
+                </span>
+            </div></td></tr><tr>
           <td id="section-1-content-block-3-collapse-item-3-cell-2-1" class="pr-3" ><div class="show-scrollbars">
                 <span >
                     <span style="word-break:break-all;" >data_asset_name</span>
                 </span>
             </div></td><td id="section-1-content-block-3-collapse-item-3-cell-2-2" class="" ><div class="show-scrollbars">
                 <span >
-                    <span style="word-break:break-all;" >surveys.developer_salaries</span>
-                </span>
-            </div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-3-cell-3-1" class="pr-3" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >data_asset_name_prefix</span>
-                </span>
-            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-3-2" class="" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" ></span>
-                </span>
-            </div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-3-cell-4-1" class="pr-3" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >data_asset_name_suffix</span>
-                </span>
-            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-4-2" class="" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" ></span>
-                </span>
-            </div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-3-cell-5-1" class="pr-3" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >include_schema_name</span>
-                </span>
-            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-5-2" class="" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >True</span>
-                </span>
-            </div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-3-cell-6-1" class="pr-3" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >schema_name</span>
-                </span>
-            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-6-2" class="" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >surveys</span>
-                </span>
-            </div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-3-cell-7-1" class="pr-3" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >table_name</span>
-                </span>
-            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-7-2" class="" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >developer_salaries</span>
-                </span>
-            </div></td></tr><tr>
-          <td id="section-1-content-block-3-collapse-item-3-cell-8-1" class="pr-3" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >type</span>
-                </span>
-            </div></td><td id="section-1-content-block-3-collapse-item-3-cell-8-2" class="" ><div class="show-scrollbars">
-                <span >
-                    <span style="word-break:break-all;" >table</span>
+                    <span style="word-break:break-all;" >developer_salaries_csv</span>
                 </span>
             </div></td></tr></tbody>
 </table>
@@ -1244,9 +1171,9 @@ $(function() {
                 </span>
             </div></td><td id="section-2-content-block-2-cell-1-2" ><div class="show-scrollbars">
                 <span >
-                    Must have these columns in this order: <span class="badge badge-secondary" >year</span>, <span class="badge badge-secondary" >seniority_level</span>, <span class="badge badge-secondary" >employment_status</span>, <span class="badge badge-secondary" >job_title</span>, <span class="badge badge-secondary" >salary_eur</span>, <span class="badge badge-secondary" >salary_currency</span>, <span class="badge badge-secondary" >salary</span>, <span class="badge badge-secondary" >country</span>, <span class="badge badge-secondary" >remote_ratio</span>, <span class="badge badge-secondary" >company_location</span>, <span class="badge badge-secondary" >company_size</span>, <span class="badge badge-secondary" >job_category</span>
+                    Must have these columns in this order: <span class="badge badge-secondary" >work_year</span>, <span class="badge badge-secondary" >experience_level</span>, <span class="badge badge-secondary" >employment_type</span>, <span class="badge badge-secondary" >job_title</span>, <span class="badge badge-secondary" >salary</span>, <span class="badge badge-secondary" >salary_currency</span>, <span class="badge badge-secondary" >salary_in_usd</span>, <span class="badge badge-secondary" >employee_residence</span>, <span class="badge badge-secondary" >remote_ratio</span>, <span class="badge badge-secondary" >company_location</span>, <span class="badge badge-secondary" >company_size</span>
                 </span>
-            </div></td><td id="section-2-content-block-2-cell-1-3" ><div class="show-scrollbars">['year', 'seniority_level', 'employment_status', 'job_title', 'salary_eur', 'salary_currency', 'salary', 'country', 'remote_ratio', 'company_location', 'company_size', 'job_category']</div></td></tr><tr>
+            </div></td><td id="section-2-content-block-2-cell-1-3" ><div class="show-scrollbars">['work_year', 'experience_level', 'employment_type', 'job_title', 'salary', 'salary_currency', 'salary_in_usd', 'employee_residence', 'remote_ratio', 'company_location', 'company_size']</div></td></tr><tr>
           <td id="section-2-content-block-2-cell-2-1" class="hide-succeeded-validation-target-child" ><div class="show-scrollbars">
                 <span >
                     <i class="fas fa-check-circle text-success" ></i>
@@ -1255,7 +1182,7 @@ $(function() {
                 <span >
                     Must have greater than or equal to <span class="badge badge-secondary" >10000</span> and less than or equal to <span class="badge badge-secondary" >100000</span> rows.
                 </span>
-            </div></td><td id="section-2-content-block-2-cell-2-3" ><div class="show-scrollbars">15891</div></td></tr></tbody>
+            </div></td><td id="section-2-content-block-2-cell-2-3" ><div class="show-scrollbars">15965</div></td></tr></tbody>
 </table>
 
 </div>
