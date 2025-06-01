@@ -15,6 +15,8 @@ permissions:
 jobs:
   gx-csv-validation:
     runs-on: ubuntu-latest
+    outputs:
+      gx_status: ${{ steps.capture-status.outputs.gx_status }}
 
     steps:
     # 1. code + history -------------------------------------------------------
@@ -43,7 +45,7 @@ jobs:
         mkdir -p great_expectations/uncommitted/validations
         cp -r validation_metadata/. great_expectations/uncommitted/validations/ || true
 
-    # 4. (optional) authenticate to GCP if your script needs it ---------------
+    # 4. Authenticate to GCP  ---------------
     - name: Authenticate with Google Cloud
       uses: google-github-actions/auth@v1
       with:
@@ -72,12 +74,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  notify-slack-success:
+  notify-slack-validation-success:
     needs: gx-csv-validation
-    if: success()
+    if: needs.gx-csv-validation.outputs.gx_status == 'validation_passed'
     runs-on: ubuntu-latest
     steps:
-      - name: Notify Slack of success
+      - name: Notify Slack (Validation Passed)
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
@@ -88,18 +90,50 @@ jobs:
             • Workflow: `${{ github.workflow }}`
             • Run: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>
 
-  notify-slack-failure:
+  notify-slack-validation-failure:
     needs: gx-csv-validation
-    if: failure()
+    if: needs.gx-csv-validation.outputs.gx_status == 'validation_failed'
     runs-on: ubuntu-latest
     steps:
-      - name: Notify Slack of failure
+      - name: Notify Slack (Validation Failed)
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: '#FFCC00'
+          SLACK_MESSAGE: |
+            ⚠️ *GX Validation Failed (expectations not met)*
+            • Repo: `${{ github.repository }}`
+            • Workflow: `${{ github.workflow }}`
+            • Run: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>
+
+  notify-slack-script-failure:
+    needs: gx-csv-validation
+    if: needs.gx-csv-validation.outputs.gx_status == 'script_failed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack (Script Failed)
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_COLOR: '#FF0000'
           SLACK_MESSAGE: |
-            ❌ *GX CSV Schema Validation Failed!*
+            ❌ *GX Run Script Failed (exception during execution)*
+            • Repo: `${{ github.repository }}`
+            • Workflow: `${{ github.workflow }}`
+            • Run: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>
+
+  notify-slack-gha-failure:
+    needs: gx-csv-validation
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack (GHA Infra Failure)
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: '#800000'
+          SLACK_MESSAGE: |
+            🚨 *GX Workflow Failed (Infrastructure / GHA Error)*
             • Repo: `${{ github.repository }}`
             • Workflow: `${{ github.workflow }}`
             • Run: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View logs>
