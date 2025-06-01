@@ -55,6 +55,10 @@ jobs:
     - name: Run CSV schema validation
       run: python run_csv_validation.py
 
+    - name: Capture GX status
+      id: capture-status
+      run: echo "gx_status=$(cat gx_status.txt)" >> $GITHUB_OUTPUT
+
     # 6. Copy fresh docs + metadata back to gh-pages --------------------------
     - name: Stage updated docs & metadata
       run: |
