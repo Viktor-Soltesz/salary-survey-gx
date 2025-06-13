@@ -2,12 +2,12 @@ name: GX CSV Schema Validation
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/gx_run_csv.yaml'
-      - 'run_csv_validation.py'
-      - 'great_expectations/**'
-      - 'requirements.txt'
+  #push:
+  #  paths:
+  #    - '.github/workflows/gx_run_csv.yaml'
+  #    - 'run_csv_validation.py'
+  #    - 'great_expectations/**'
+  #    - 'requirements.txt'
 
 permissions:
   contents: write
